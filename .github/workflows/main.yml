@@ -8,37 +8,31 @@ jobs:
   make-contribution:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository Code
+      - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Append Random Emoji to File
+      - name: Make daily contribution
         run: |
-          EMOJI_LIST=("😀" "😃" "😄" "😁" "😆" "😅" "😂" "🤣" "😊" "😇" "🙂" "🙃" "😉" "😌" "😍" "🥰" "😘" "😗" "😙" "😚" "😋" "😛" "😜" "😝" "🤪" "🤨" "🧐" "🤓" "😎" "🥳")
-          RANDOM_EMOJI=${EMOJI_LIST[$RANDOM % ${#EMOJI_LIST[@]}]}
-          echo "$RANDOM_EMOJI" >> test.md
-
-      - name: Commit Changes to Repository
+          echo "🤓" >> test.md
+      - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
-          author_name: "pashelnaher"
-          author_email: "dixibn4kn@gmail.com"
-          message: "Daily contribution update"
+          author_name: "NAME"
+          author_email: "EMAIL"
+          message: "test"
           add: "test.md"
-
-      - name: Push Changes to Branch
+      - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: daily-contribution
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Pull Request
+      - name: Open pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          title: "Automated Daily Contribution"
-          commit-message: "Automated daily update"
+          title: "test"
+          commit-message: "test"
           branch: daily-contribution
           base: main
-          body: "This pull request was automatically generated as part of the daily update workflow."
+          body: "test."
           token: ${{ secrets.GITHUB_TOKEN }}
